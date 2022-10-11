@@ -28,7 +28,7 @@ class OnboardingScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       SignInButton(
-                        text: "email",
+                        text: "e-mail",
                         color: kDarkPink,
                         function: () {},
                       ),
