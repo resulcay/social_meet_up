@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_meet_up/constants.dart';
 
 class SignInButton extends StatelessWidget {
   final String text;
@@ -21,17 +22,15 @@ class SignInButton extends StatelessWidget {
           height: 52,
           decoration: BoxDecoration(
             color: color,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(40),
-            ),
+            borderRadius: BorderRadius.circular(40),
           ),
           child: Center(
             child: Text(
               text.toUpperCase(),
               style: const TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                color: kNormalWhite,
               ),
             ),
           ),
