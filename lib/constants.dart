@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Constant Colors
 const Color kDarkGreen = Color(0xFF417623);
 const Color kDarkBlue = Color(0xFF132641);
 const Color kSeaBlue = Color(0xFF4EBDEF);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_meet_up/home_screen.dart';
+
+import 'screens/sign_in_screen/sign_in_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.purple,
         fontFamily: "Montserrat",
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const HomeScreen(),
+      home: const SignInScreen(),
+      // home: const OnboardingScreen(),
     );
   }
 }

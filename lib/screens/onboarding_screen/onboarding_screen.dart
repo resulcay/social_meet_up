@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:social_meet_up/constants.dart';
-import 'package:social_meet_up/sign_in_button.dart';
+
+import '../../constants.dart';
+import 'components/dot_indicator.dart';
+import 'components/onboarding_screen_body_item.dart';
+import 'components/sign_in_button.dart';
 
 PageController onboardingBodyController = PageController();
 List<Widget> onboardingBodyItems = const [
@@ -16,6 +19,10 @@ List<Widget> onboardingBodyItems = const [
   OnboardingScreenBodyItem(
     title: "At last",
     description: "very very diff content here",
+  ),
+  OnboardingScreenBodyItem(
+    title: "End last",
+    description: "very very very diff content here",
   ),
 ];
 
@@ -59,15 +66,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: List.generate(
                                   onboardingBodyItems.length, (index) {
-                                return OnboardingCircleAvatar(
+                                return DotIndicator(
                                   isActive: index == _pageIndex,
                                 );
                               }),
                             )),
                         Expanded(
                           child: PageView.builder(
+                            physics: const BouncingScrollPhysics(),
                             controller: onboardingBodyController,
                             itemCount: onboardingBodyItems.length,
+                            // Dot indicator get triggered when PageView index changed.
+
                             onPageChanged: (value) {
                               setState(() {
                                 _pageIndex = value;
@@ -92,16 +102,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Expanded(
                   flex: 2,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SignInButton(
                         text: "e-mail",
                         color: kDarkPink,
-                        function: () {},
+                        function: () {
+                          // TODO : Route to SignIn or SignUp via Mail.
+                        },
                       ),
                       SignInButton(
-                        text: "facebook",
+                        text: "google",
                         color: kNormalPink,
-                        function: () {},
+                        function: () {
+                          // TODO : Route to SignIn via Google.
+                        },
                       ),
                     ],
                   ),
@@ -111,68 +126,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class OnboardingCircleAvatar extends StatelessWidget {
-  final bool isActive;
-  const OnboardingCircleAvatar({
-    this.isActive = false,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CircleAvatar(
-        radius: 4,
-        backgroundColor: isActive ? kNormalWhite : kGrey,
-      ),
-    );
-  }
-}
-
-class OnboardingScreenBodyItem extends StatelessWidget {
-  final String title;
-  final String description;
-  const OnboardingScreenBodyItem({
-    Key? key,
-    required this.title,
-    required this.description,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: kNormalWhite,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Text(
-            description,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: kNormalWhite,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
     );
   }
 }
