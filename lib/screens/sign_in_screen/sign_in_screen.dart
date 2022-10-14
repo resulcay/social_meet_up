@@ -41,9 +41,7 @@ class SignInScreen extends StatelessWidget {
                         text: "sign up",
                         textColor: kGrey,
                         function: () {
-                          if (kDebugMode) {
-                            print("Gestures work!");
-                          }
+                          // TODO : Route to SignUp Screen.
                         },
                       ),
                     ],

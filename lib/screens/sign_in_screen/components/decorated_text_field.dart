@@ -28,10 +28,16 @@ class DecoratedTextField extends StatelessWidget {
           color: kDarkestPurple.withOpacity(0.32),
         ),
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: kDarkPurple, width: 2),
+          borderSide: BorderSide(
+            color: kGrey,
+            width: 1,
+          ),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: kDarkPurple, width: 2),
+          borderSide: BorderSide(
+            color: kDarkPurple,
+            width: 2,
+          ),
         ),
       ),
     );
