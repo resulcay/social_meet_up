@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/home_screen/home_screen.dart';
 import 'screens/sign_up_screen/sign_up_screen.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Montserrat",
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const SignUpScreen(),
+      home: const HomeScreen(),
       // home: const OnboardingScreen(),
     );
   }
