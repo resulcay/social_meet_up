@@ -81,7 +81,7 @@ List<EventCardModel> eventCards = [
       day: "TUESDAY",
       timeOfDay: "7:30",
       completerTimeText: "AM",
-      descriptionText: "Vegetarians Recipes Meetup",
+      descriptionText: "Vegetarians Recipe Meetup",
       imagePath: "assets/images/avatar-man.png",
       iconPath: "assets/images/thermometer.png",
       userName: "John Derive",
