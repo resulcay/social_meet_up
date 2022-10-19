@@ -16,4 +16,12 @@ const Color kWhitePurple = Color(0xFF9599B3);
 const Color kDarkestPurple = Color(0xFF241332);
 const Color kDarkPink = Color(0xFF8A56AC);
 const Color kNormalPink = Color(0xFFD47FA6);
+const Color kDeepBlue = Color(0xFF374750);
 const Color kGrey = Color(0xFF979797);
+
+// Constant TextStyles
+
+TextStyle kTextStyle = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: kNormalWhite.withOpacity(.48));
