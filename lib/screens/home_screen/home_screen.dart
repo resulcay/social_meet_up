@@ -47,11 +47,12 @@ List<Widget> _viewBuilder(BuildContext context) {
           child: Stack(
             children: [
               Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 80, right: 35),
-                    child: Image.asset(eventCards[index].iconPath),
-                  )),
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 80, right: 35),
+                  child: Image.asset(eventCards[index].iconPath),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 30, bottom: 10),
                 child: Column(
@@ -93,11 +94,11 @@ List<Widget> _viewBuilder(BuildContext context) {
                           Stack(
                             children: [
                               Positioned(
-                                left: 10,
+                                left: 12,
                                 child: Image.asset(eventCards[index].imagePath),
                               ),
                               Image.asset(eventCards[index].imagePath),
-                              const SizedBox(width: 40)
+                              const SizedBox(width: 50)
                             ],
                           ),
                           Text(
@@ -121,6 +122,11 @@ List<Widget> _viewBuilder(BuildContext context) {
     ),
   );
 
+  SliverToBoxAdapter spaceAtEnd = const SliverToBoxAdapter(
+    child: SizedBox(height: 100),
+  );
+
   bodyWithAppBar.insertAll(1, body);
+  bodyWithAppBar.add(spaceAtEnd);
   return bodyWithAppBar;
 }

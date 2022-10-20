@@ -1,27 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:social_meet_up/media_query_extension.dart';
+import 'package:social_meet_up/models/app_bar_category_model.dart';
 import 'package:social_meet_up/models/event_card_model.dart';
 
 import '../../../constants.dart';
 
-List<Widget> appBarRemainingWidgets = List.generate(
-    5,
-    (index) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Container(
-            height: 48,
-            width: 48,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              shape: BoxShape.circle,
-              border: Border.all(color: kGrey),
-            ),
-            child: Image.asset("assets/images/heart.png"),
-          ),
-        ));
-
-class CustomSliverAppBar extends StatelessWidget {
+class CustomSliverAppBar extends StatefulWidget {
   final bool badgeToAnimate;
   final String badgeText;
   final String imagePath;
@@ -35,7 +20,57 @@ class CustomSliverAppBar extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CustomSliverAppBar> createState() => _CustomSliverAppBarState();
+}
+
+class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
+  int selectedIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
+    List<Widget> appBarRemainingWidgets = List.generate(
+        4,
+        (index) => GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      height: selectedIndex == index ? 62 : 54,
+                      width: selectedIndex == index ? 62 : 54,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: selectedIndex == index
+                              ? categories[index].borderColor!
+                              : kGrey,
+                          width: selectedIndex == index ? 2 : 1,
+                        ),
+                      ),
+                      child: Image.asset(categories[index].iconPath),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        categories[index].categoryName,
+                        style: TextStyle(
+                          color: kDeepBlue.withOpacity(.56),
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ));
     return SliverAppBar(
       expandedHeight: context.height * .2,
       backgroundColor: eventCards[0].cardColor,
@@ -49,6 +84,7 @@ class CustomSliverAppBar extends StatelessWidget {
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
+            reverse: true,
             physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.only(
@@ -66,31 +102,50 @@ class CustomSliverAppBar extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Badge(
-                            alignment: Alignment.topRight,
-                            toAnimate: badgeToAnimate,
-                            shape: BadgeShape.square,
-                            padding: const EdgeInsets.all(5),
-                            badgeColor: kWhitePurple,
-                            borderRadius: BorderRadius.circular(12),
-                            badgeContent: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3),
-                              child: Text(
-                                badgeText,
-                                style: const TextStyle(
-                                  color: kNormalWhite,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Badge(
+                                  alignment: Alignment.topRight,
+                                  toAnimate: widget.badgeToAnimate,
+                                  shape: BadgeShape.square,
+                                  padding: const EdgeInsets.all(5),
+                                  badgeColor: kWhitePurple,
+                                  borderRadius: BorderRadius.circular(12),
+                                  badgeContent: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 3),
+                                    child: Text(
+                                      widget.badgeText,
+                                      style: const TextStyle(
+                                        color: kNormalWhite,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 27,
+                                    backgroundColor: Colors.white,
+                                    child: Image.asset(
+                                      widget.imagePath,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            child: CircleAvatar(
-                              radius: 24,
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                imagePath,
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    widget.bottomText,
+                                    style: TextStyle(
+                                      color: kDeepBlue.withOpacity(.56),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                           Row(
@@ -98,17 +153,6 @@ class CustomSliverAppBar extends StatelessWidget {
                           )
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: Text(
-                          bottomText,
-                          style: TextStyle(
-                            color: kDeepBlue.withOpacity(.56),
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
                     ],
                   )
                 ],
