@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:social_meet_up/media_query_extension.dart';
@@ -28,52 +30,9 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> appBarRemainingWidgets = List.generate(
-        4,
-        (index) => GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  children: [
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      height: selectedIndex == index ? 62 : 54,
-                      width: selectedIndex == index ? 62 : 54,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: selectedIndex == index
-                              ? categories[index].borderColor!
-                              : kGrey,
-                          width: selectedIndex == index ? 2 : 1,
-                        ),
-                      ),
-                      child: Image.asset(categories[index].iconPath),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Text(
-                        categories[index].categoryName,
-                        style: TextStyle(
-                          color: kDeepBlue.withOpacity(.56),
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ));
     return SliverAppBar(
       expandedHeight: context.height * .2,
-      backgroundColor: eventCards[0].cardColor,
+      backgroundColor: eventCardColors[0],
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           decoration: const BoxDecoration(
@@ -82,81 +41,124 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
               bottomLeft: Radius.circular(80),
             ),
           ),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            reverse: true,
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 40,
-                bottom: 20,
-                left: 40,
-                right: 20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30, top: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  child: Row(
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Badge(
-                                  alignment: Alignment.topRight,
-                                  toAnimate: widget.badgeToAnimate,
-                                  shape: BadgeShape.square,
-                                  padding: const EdgeInsets.all(5),
-                                  badgeColor: kWhitePurple,
-                                  borderRadius: BorderRadius.circular(12),
-                                  badgeContent: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3),
-                                    child: Text(
-                                      widget.badgeText,
-                                      style: const TextStyle(
-                                        color: kNormalWhite,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                  child: CircleAvatar(
-                                    radius: 27,
-                                    backgroundColor: Colors.white,
-                                    child: Image.asset(
-                                      widget.imagePath,
-                                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15, top: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Badge(
+                              alignment: Alignment.topRight,
+                              toAnimate: widget.badgeToAnimate,
+                              shape: BadgeShape.square,
+                              padding: const EdgeInsets.all(5),
+                              badgeColor: kWhitePurple,
+                              borderRadius: BorderRadius.circular(12),
+                              badgeContent: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 3),
+                                child: Text(
+                                  widget.badgeText,
+                                  style: const TextStyle(
+                                    color: kNormalWhite,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: Text(
-                                    widget.bottomText,
-                                    style: TextStyle(
-                                      color: kDeepBlue.withOpacity(.56),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
+                              ),
+                              child: CircleAvatar(
+                                radius: 27,
+                                backgroundColor: Colors.white,
+                                child: Image.asset(
+                                  widget.imagePath,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 0),
+                              child: Text(
+                                widget.bottomText,
+                                style: TextStyle(
+                                  color: kDeepBlue.withOpacity(.56),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: List.generate(
+                          categories.length,
+                          (index) => GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = index;
+                              });
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                children: [
+                                  AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    height: selectedIndex == index ? 62 : 54,
+                                    width: selectedIndex == index ? 62 : 54,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: selectedIndex == index
+                                            ? appBarBorderColors[index]
+                                            : kGrey,
+                                        width: selectedIndex == index ? 2 : 1,
+                                      ),
                                     ),
+                                    child:
+                                        Image.asset(categories[index].iconPath),
                                   ),
-                                )
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      categories[index].categoryName,
+                                      style: TextStyle(
+                                        color: selectedIndex == index
+                                            ? kDeepBlue
+                                            : kDeepBlue.withOpacity(.56),
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                          Row(
-                            children: appBarRemainingWidgets,
-                          )
-                        ],
-                      ),
+                        ),
+                      )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Image.asset("assets/images/arrow.png"),
+                  ),
+                )
+              ],
             ),
           ),
         ),

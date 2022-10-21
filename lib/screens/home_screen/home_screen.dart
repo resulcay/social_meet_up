@@ -35,11 +35,11 @@ List<Widget> _viewBuilder(BuildContext context) {
         height: context.height * .41,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: eventCards[index].backgroundColor,
+          color: eventCardBackgroundColors[index],
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: eventCards[index].cardColor,
+            color: eventCardColors[index],
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(80),
             ),

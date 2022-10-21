@@ -8,12 +8,9 @@ import '../constants.dart';
 class AppBarCategoryModel {
   final String iconPath;
   final String categoryName;
-  final Color? borderColor;
-
   AppBarCategoryModel({
     required this.iconPath,
     required this.categoryName,
-    this.borderColor,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,8 +24,6 @@ class AppBarCategoryModel {
     return AppBarCategoryModel(
       iconPath: map['iconPath'] as String,
       categoryName: map['categoryName'] as String,
-      borderColor:
-          map['borderColor'] != null ? Color(map['borderColor'] as int) : null,
     );
   }
 
@@ -42,21 +37,24 @@ List<AppBarCategoryModel> categories = [
   AppBarCategoryModel(
     iconPath: "assets/images/reading-up.png",
     categoryName: "TRENDING",
-    borderColor: kNormalPink,
   ),
   AppBarCategoryModel(
     iconPath: "assets/images/heart.png",
     categoryName: "HEALTH",
-    borderColor: kNormalGreen,
   ),
   AppBarCategoryModel(
     iconPath: "assets/images/headphones.png",
     categoryName: "MUSIC",
-    borderColor: kSeaBlue,
   ),
   AppBarCategoryModel(
-    iconPath: "assets/images/reading-up.png",
+    iconPath: "assets/images/book-open.png",
     categoryName: "READING",
-    borderColor: kDarkestPurple,
   ),
+];
+
+List<Color> appBarBorderColors = [
+  kNormalPink,
+  kNormalGreen,
+  kSeaBlue,
+  kDarkestPurple
 ];
