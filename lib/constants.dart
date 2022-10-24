@@ -25,3 +25,9 @@ TextStyle kTextStyle = TextStyle(
     fontSize: 13,
     fontWeight: FontWeight.w600,
     color: kNormalWhite.withOpacity(.48));
+
+// Constant ScrollPhysics
+
+BouncingScrollPhysics kBounceScroll = const BouncingScrollPhysics();
+NeverScrollableScrollPhysics kNeverScroll =
+    const NeverScrollableScrollPhysics();

@@ -21,14 +21,14 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.only(top: 25, bottom: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TopSignInSwitch(
                           containerColor: kDarkPink,
                           text: "sign in",
-                          textColor: kGrey,
+                          textColor: kNormalWhite.withOpacity(.6),
                           function: () {
                             // TODO : Route to SignIn Screen.
                           },
@@ -49,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         Container(
                           width: double.infinity,
-                          height: context.height * 0.33,
+                          height: 271,
                           decoration: BoxDecoration(
                             color: kNormalWhite,
                             borderRadius: BorderRadius.circular(40),

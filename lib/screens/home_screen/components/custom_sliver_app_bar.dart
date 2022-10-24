@@ -1,12 +1,15 @@
-import 'dart:math';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_meet_up/media_query_extension.dart';
 import 'package:social_meet_up/models/app_bar_category_model.dart';
 import 'package:social_meet_up/models/event_card_model.dart';
+import 'package:social_meet_up/page_controller.dart';
+import 'package:social_meet_up/screens/home_screen/home_screen.dart';
 
 import '../../../constants.dart';
+
+ScrollController controller = ScrollController();
 
 class CustomSliverAppBar extends StatefulWidget {
   final bool badgeToAnimate;
@@ -26,13 +29,13 @@ class CustomSliverAppBar extends StatefulWidget {
 }
 
 class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: context.height * .2,
-      backgroundColor: eventCardColors[0],
+      backgroundColor: tree[
+          Provider.of<PageIndexController>(context, listen: true)
+              .selectedIndex],
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           decoration: const BoxDecoration(
@@ -48,6 +51,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SingleChildScrollView(
+                  controller: controller,
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
                   child: Row(
@@ -103,9 +107,16 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                           categories.length,
                           (index) => GestureDetector(
                             onTap: () {
-                              setState(() {
-                                selectedIndex = index;
-                              });
+                              Provider.of<PageIndexController>(context,
+                                      listen: false)
+                                  .changeIndex(index);
+                              pageController.animateToPage(
+                                Provider.of<PageIndexController>(context,
+                                        listen: false)
+                                    .selectedIndex,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn,
+                              );
                             },
                             child: Padding(
                               padding:
@@ -114,16 +125,38 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                                 children: [
                                   AnimatedContainer(
                                     duration: const Duration(milliseconds: 200),
-                                    height: selectedIndex == index ? 62 : 54,
-                                    width: selectedIndex == index ? 62 : 54,
+                                    height: Provider.of<PageIndexController>(
+                                                    context,
+                                                    listen: true)
+                                                .selectedIndex ==
+                                            index
+                                        ? 62
+                                        : 54,
+                                    width: Provider.of<PageIndexController>(
+                                                    context,
+                                                    listen: true)
+                                                .selectedIndex ==
+                                            index
+                                        ? 62
+                                        : 54,
                                     decoration: BoxDecoration(
                                       color: Colors.transparent,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: selectedIndex == index
+                                        color: Provider.of<PageIndexController>(
+                                                        context,
+                                                        listen: true)
+                                                    .selectedIndex ==
+                                                index
                                             ? appBarBorderColors[index]
                                             : kGrey,
-                                        width: selectedIndex == index ? 2 : 1,
+                                        width: Provider.of<PageIndexController>(
+                                                        context,
+                                                        listen: true)
+                                                    .selectedIndex ==
+                                                index
+                                            ? 2
+                                            : 1,
                                       ),
                                     ),
                                     child:
@@ -134,7 +167,11 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                                     child: Text(
                                       categories[index].categoryName,
                                       style: TextStyle(
-                                        color: selectedIndex == index
+                                        color: Provider.of<PageIndexController>(
+                                                        context,
+                                                        listen: true)
+                                                    .selectedIndex ==
+                                                index
                                             ? kDeepBlue
                                             : kDeepBlue.withOpacity(.56),
                                         fontSize: 11,

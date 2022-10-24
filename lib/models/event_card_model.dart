@@ -106,3 +106,10 @@ List<Color> eventCardBackgroundColors = [
   kNormalGreen,
   Colors.transparent
 ];
+
+List<Color> tree = [
+  kNormalPink,
+  Colors.tealAccent,
+  Colors.greenAccent,
+  Colors.orangeAccent,
+];
