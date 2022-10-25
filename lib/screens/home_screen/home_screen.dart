@@ -4,7 +4,7 @@ import 'package:social_meet_up/media_query_extension.dart';
 import 'package:social_meet_up/models/event_card_model.dart';
 
 import '../../constants.dart';
-import '../../page_controller.dart';
+import '../../providers/index_provider.dart';
 import 'components/custom_sliver_app_bar.dart';
 
 PageController pageController = PageController();
@@ -19,17 +19,18 @@ class HomeScreen extends StatelessWidget {
       body: NestedScrollView(
         physics: kNeverScroll,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const CustomSliverAppBar(
+          CustomSliverAppBar(
             badgeText: "12",
             badgeToAnimate: true,
             bottomText: "YOU",
             imagePath: "assets/images/pp.png",
+            screenHeight: context.height,
           )
         ],
         body: PageView(
           controller: pageController,
           onPageChanged: (index) {
-            Provider.of<PageIndexController>(context, listen: false)
+            Provider.of<IndexProvider>(context, listen: false)
                 .changeIndex(index);
           },
           children: [
@@ -144,10 +145,26 @@ class HomeScreen extends StatelessWidget {
               width: context.width,
               color: Colors.tealAccent,
             ),
-            Container(
-              height: context.height,
-              width: context.width,
-              color: Colors.greenAccent,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: context.height,
+                    width: context.width,
+                    color: Colors.greenAccent,
+                  ),
+                  Container(
+                    height: context.height,
+                    width: context.width,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    height: context.height,
+                    width: context.width,
+                    color: Colors.yellowAccent,
+                  ),
+                ],
+              ),
             ),
             Container(
               height: context.height,

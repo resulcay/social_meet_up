@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:social_meet_up/providers/app_bar_provider.dart';
 
-import 'page_controller.dart';
+import 'providers/index_provider.dart';
 import 'screens/home_screen/home_screen.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => PageIndexController()),
+        ChangeNotifierProvider(create: (_) => IndexProvider()),
+        ChangeNotifierProvider(create: (_) => AppBarProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

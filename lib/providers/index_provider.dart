@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PageIndexController with ChangeNotifier {
+class IndexProvider with ChangeNotifier {
   int selectedIndex = 0;
 
   changeIndex(int index) {
