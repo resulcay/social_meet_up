@@ -39,361 +39,358 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar>
   @override
   void initState() {
     super.initState();
-
-    animController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
     animation = Tween<double>(
-      begin: 0,
+      begin: widget.screenHeight * .2,
       end: widget.screenHeight,
-    ).animate(animController)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          animController.stop();
-        } else if (status == AnimationStatus.dismissed) {
-          animController.forward();
-        }
-      });
-
-    animController.forward();
+    ).animate(animController);
+    animation.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    int selectedIndex =
+        Provider.of<IndexProvider>(context, listen: true).selectedIndex;
     bool isExpanded =
         Provider.of<AppBarProvider>(context, listen: true).isExpanded;
+
     return SliverAppBar(
       expandedHeight: isExpanded ? context.height * .2 : animation.value,
-      backgroundColor:
-          tree[Provider.of<IndexProvider>(context, listen: true).selectedIndex],
+      backgroundColor: tree[selectedIndex],
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
           if (isExpanded) {
-            return FlexibleSpaceBar(
-              background: Container(
-                decoration: const BoxDecoration(
-                  color: kNormalWhite,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(80),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SingleChildScrollView(
-                        controller: controller,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 15, top: 8),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Badge(
-                                    alignment: Alignment.topRight,
-                                    toAnimate: widget.badgeToAnimate,
-                                    shape: BadgeShape.square,
-                                    padding: const EdgeInsets.all(5),
-                                    badgeColor: kWhitePurple,
-                                    borderRadius: BorderRadius.circular(12),
-                                    badgeContent: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 3),
-                                      child: Text(
-                                        widget.badgeText,
-                                        style: const TextStyle(
-                                          color: kNormalWhite,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    child: CircleAvatar(
-                                      radius: 27,
-                                      backgroundColor: Colors.white,
-                                      child: Image.asset(
-                                        widget.imagePath,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 0),
-                                    child: Text(
-                                      widget.bottomText,
-                                      style: TextStyle(
-                                        color: kDeepBlue.withOpacity(.56),
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Row(
-                              children: List.generate(
-                                categories.length,
-                                (index) => GestureDetector(
-                                  onTap: () {
-                                    Provider.of<IndexProvider>(context,
-                                            listen: false)
-                                        .changeIndex(index);
-                                    pageController.animateToPage(
-                                      Provider.of<IndexProvider>(context,
-                                              listen: false)
-                                          .selectedIndex,
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.easeIn,
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Column(
-                                      children: [
-                                        AnimatedContainer(
-                                          duration:
-                                              const Duration(milliseconds: 200),
-                                          height: Provider.of<IndexProvider>(
-                                                          context,
-                                                          listen: true)
-                                                      .selectedIndex ==
-                                                  index
-                                              ? 62
-                                              : 54,
-                                          width: Provider.of<IndexProvider>(
-                                                          context,
-                                                          listen: true)
-                                                      .selectedIndex ==
-                                                  index
-                                              ? 62
-                                              : 54,
-                                          decoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Provider.of<IndexProvider>(
-                                                              context,
-                                                              listen: true)
-                                                          .selectedIndex ==
-                                                      index
-                                                  ? appBarBorderColors[index]
-                                                  : kGrey,
-                                              width: Provider.of<IndexProvider>(
-                                                              context,
-                                                              listen: true)
-                                                          .selectedIndex ==
-                                                      index
-                                                  ? 2
-                                                  : 1,
-                                            ),
-                                          ),
-                                          child: Image.asset(
-                                              categories[index].iconPath),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            categories[index].categoryName,
-                                            style: TextStyle(
-                                              color: Provider.of<IndexProvider>(
-                                                              context,
-                                                              listen: true)
-                                                          .selectedIndex ==
-                                                      index
-                                                  ? kDeepBlue
-                                                  : kDeepBlue.withOpacity(.56),
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
+            return _horizontalAppBar(context);
+          }
+          return _verticalAppBar(context);
+        },
+      ),
+    );
+  }
+
+  FlexibleSpaceBar _verticalAppBar(BuildContext context) {
+    return FlexibleSpaceBar(
+      background: Container(
+        decoration: const BoxDecoration(
+          color: kNormalWhite,
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Badge(
+                            alignment: Alignment.topRight,
+                            toAnimate: widget.badgeToAnimate,
+                            shape: BadgeShape.square,
+                            padding: const EdgeInsets.all(5),
+                            badgeColor: kWhitePurple,
+                            borderRadius: BorderRadius.circular(12),
+                            badgeContent: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 3),
+                              child: Text(
+                                widget.badgeText,
+                                style: const TextStyle(
+                                  color: kNormalWhite,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                            child: CircleAvatar(
+                              radius: 27,
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                widget.imagePath,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            widget.bottomText,
+                            style: TextStyle(
+                              color: kDeepBlue.withOpacity(.56),
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6),
-                        child: GestureDetector(
+                    ),
+                    Column(
+                      children: List.generate(
+                        categories.length,
+                        (index) => GestureDetector(
                           onTap: () {
+                            Provider.of<IndexProvider>(context, listen: false)
+                                .changeIndex(index);
+                            pageController.animateToPage(
+                              Provider.of<IndexProvider>(context, listen: false)
+                                  .selectedIndex,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                            );
                             Provider.of<AppBarProvider>(context, listen: false)
                                 .expandAppBar();
                           },
-                          child: Image.asset("assets/images/arrow.png"),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }
-          return FlexibleSpaceBar(
-            background: Container(
-              decoration: const BoxDecoration(
-                color: kNormalWhite,
-              ),
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Badge(
-                                  alignment: Alignment.topRight,
-                                  toAnimate: widget.badgeToAnimate,
-                                  shape: BadgeShape.square,
-                                  padding: const EdgeInsets.all(5),
-                                  badgeColor: kWhitePurple,
-                                  borderRadius: BorderRadius.circular(12),
-                                  badgeContent: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3),
-                                    child: Text(
-                                      widget.badgeText,
-                                      style: const TextStyle(
-                                        color: kNormalWhite,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  height: Provider.of<IndexProvider>(context,
+                                                  listen: true)
+                                              .selectedIndex ==
+                                          index
+                                      ? 62
+                                      : 54,
+                                  width: Provider.of<IndexProvider>(context,
+                                                  listen: true)
+                                              .selectedIndex ==
+                                          index
+                                      ? 62
+                                      : 54,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Provider.of<IndexProvider>(context,
+                                                      listen: true)
+                                                  .selectedIndex ==
+                                              index
+                                          ? appBarBorderColors[index]
+                                          : kGrey,
+                                      width: Provider.of<IndexProvider>(context,
+                                                      listen: true)
+                                                  .selectedIndex ==
+                                              index
+                                          ? 2
+                                          : 1,
                                     ),
                                   ),
-                                  child: CircleAvatar(
-                                    radius: 27,
-                                    backgroundColor: Colors.white,
-                                    child: Image.asset(
-                                      widget.imagePath,
+                                  child:
+                                      Image.asset(categories[index].iconPath),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    categories[index].categoryName,
+                                    style: TextStyle(
+                                      color: Provider.of<IndexProvider>(context,
+                                                      listen: true)
+                                                  .selectedIndex ==
+                                              index
+                                          ? kDeepBlue
+                                          : kDeepBlue.withOpacity(.56),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  FlexibleSpaceBar _horizontalAppBar(BuildContext context) {
+    return FlexibleSpaceBar(
+      background: Container(
+        decoration: const BoxDecoration(
+          color: kNormalWhite,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(80),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30, bottom: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SingleChildScrollView(
+                    controller: controller,
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15, top: 8),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Badge(
+                                alignment: Alignment.topRight,
+                                toAnimate: widget.badgeToAnimate,
+                                shape: BadgeShape.square,
+                                padding: const EdgeInsets.all(5),
+                                badgeColor: kWhitePurple,
+                                borderRadius: BorderRadius.circular(12),
+                                badgeContent: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 3),
+                                  child: Text(
+                                    widget.badgeText,
+                                    style: const TextStyle(
+                                      color: kNormalWhite,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
-                                Text(
+                                child: CircleAvatar(
+                                  radius: 27,
+                                  backgroundColor: Colors.white,
+                                  child: Image.asset(
+                                    widget.imagePath,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 0),
+                                child: Text(
                                   widget.bottomText,
                                   style: TextStyle(
                                     color: kDeepBlue.withOpacity(.56),
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ),
-                          Column(
-                            children: List.generate(
-                              categories.length,
-                              (index) => GestureDetector(
-                                onTap: () {
+                        ),
+                        Row(
+                          children: List.generate(
+                            categories.length,
+                            (index) => GestureDetector(
+                              onTap: () {
+                                Provider.of<IndexProvider>(context,
+                                        listen: false)
+                                    .changeIndex(index);
+                                pageController.animateToPage(
                                   Provider.of<IndexProvider>(context,
                                           listen: false)
-                                      .changeIndex(index);
-                                  pageController.animateToPage(
-                                    Provider.of<IndexProvider>(context,
-                                            listen: false)
-                                        .selectedIndex,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeIn,
-                                  );
-                                  Provider.of<AppBarProvider>(context,
-                                          listen: false)
-                                      .expandAppBar();
-                                },
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  child: Column(
-                                    children: [
-                                      AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 200),
-                                        height: Provider.of<IndexProvider>(
-                                                        context,
-                                                        listen: true)
-                                                    .selectedIndex ==
-                                                index
-                                            ? 62
-                                            : 54,
-                                        width: Provider.of<IndexProvider>(
-                                                        context,
-                                                        listen: true)
-                                                    .selectedIndex ==
-                                                index
-                                            ? 62
-                                            : 54,
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Provider.of<IndexProvider>(
-                                                            context,
-                                                            listen: true)
-                                                        .selectedIndex ==
-                                                    index
-                                                ? appBarBorderColors[index]
-                                                : kGrey,
-                                            width: Provider.of<IndexProvider>(
-                                                            context,
-                                                            listen: true)
-                                                        .selectedIndex ==
-                                                    index
-                                                ? 2
-                                                : 1,
-                                          ),
+                                      .selectedIndex,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeIn,
+                                );
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Column(
+                                  children: [
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      height: Provider.of<IndexProvider>(
+                                                      context,
+                                                      listen: true)
+                                                  .selectedIndex ==
+                                              index
+                                          ? 62
+                                          : 54,
+                                      width: Provider.of<IndexProvider>(context,
+                                                      listen: true)
+                                                  .selectedIndex ==
+                                              index
+                                          ? 62
+                                          : 54,
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Provider.of<IndexProvider>(
+                                                          context,
+                                                          listen: true)
+                                                      .selectedIndex ==
+                                                  index
+                                              ? appBarBorderColors[index]
+                                              : kGrey,
+                                          width: Provider.of<IndexProvider>(
+                                                          context,
+                                                          listen: true)
+                                                      .selectedIndex ==
+                                                  index
+                                              ? 2
+                                              : 1,
                                         ),
-                                        child: Image.asset(
-                                            categories[index].iconPath),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Text(
-                                          categories[index].categoryName,
-                                          style: TextStyle(
-                                            color: Provider.of<IndexProvider>(
-                                                            context,
-                                                            listen: true)
-                                                        .selectedIndex ==
-                                                    index
-                                                ? kDeepBlue
-                                                : kDeepBlue.withOpacity(.56),
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      child: Image.asset(
+                                          categories[index].iconPath),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        categories[index].categoryName,
+                                        style: TextStyle(
+                                          color: Provider.of<IndexProvider>(
+                                                          context,
+                                                          listen: true)
+                                                      .selectedIndex ==
+                                                  index
+                                              ? kDeepBlue
+                                              : kDeepBlue.withOpacity(.56),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                      )
-                                    ],
-                                  ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ),
-          );
-        },
+              Padding(
+                padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    Provider.of<AppBarProvider>(context, listen: false)
+                        .expandAppBar();
+                    animController.reset();
+                    animController.forward();
+                  },
+                  child: Image.asset("assets/images/arrow.png"),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
