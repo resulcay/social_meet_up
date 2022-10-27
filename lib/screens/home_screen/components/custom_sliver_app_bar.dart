@@ -87,47 +87,52 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar>
               children: [
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Badge(
-                            alignment: Alignment.topRight,
-                            toAnimate: widget.badgeToAnimate,
-                            shape: BadgeShape.square,
-                            padding: const EdgeInsets.all(5),
-                            badgeColor: kWhitePurple,
-                            borderRadius: BorderRadius.circular(12),
-                            badgeContent: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3),
-                              child: Text(
-                                widget.badgeText,
-                                style: const TextStyle(
-                                  color: kNormalWhite,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
+                    GestureDetector(
+                      onTap: () {
+                        // TODO : Navigate to Profile Screen.
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Badge(
+                              alignment: Alignment.topRight,
+                              toAnimate: widget.badgeToAnimate,
+                              shape: BadgeShape.square,
+                              padding: const EdgeInsets.all(5),
+                              badgeColor: kWhitePurple,
+                              borderRadius: BorderRadius.circular(12),
+                              badgeContent: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 3),
+                                child: Text(
+                                  widget.badgeText,
+                                  style: const TextStyle(
+                                    color: kNormalWhite,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                radius: 27,
+                                backgroundColor: Colors.white,
+                                child: Image.asset(
+                                  widget.imagePath,
                                 ),
                               ),
                             ),
-                            child: CircleAvatar(
-                              radius: 27,
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                widget.imagePath,
+                            Text(
+                              widget.bottomText,
+                              style: TextStyle(
+                                color: kDeepBlue.withOpacity(.56),
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ),
-                          ),
-                          Text(
-                            widget.bottomText,
-                            style: TextStyle(
-                              color: kDeepBlue.withOpacity(.56),
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Column(
@@ -242,50 +247,55 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar>
                     physics: const BouncingScrollPhysics(),
                     child: Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 15, top: 8),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Badge(
-                                alignment: Alignment.topRight,
-                                toAnimate: widget.badgeToAnimate,
-                                shape: BadgeShape.square,
-                                padding: const EdgeInsets.all(5),
-                                badgeColor: kWhitePurple,
-                                borderRadius: BorderRadius.circular(12),
-                                badgeContent: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 3),
-                                  child: Text(
-                                    widget.badgeText,
-                                    style: const TextStyle(
-                                      color: kNormalWhite,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
+                        GestureDetector(
+                          onTap: () {
+                            // TODO : Navigate to Profile Screen.
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 15, top: 8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Badge(
+                                  alignment: Alignment.topRight,
+                                  toAnimate: widget.badgeToAnimate,
+                                  shape: BadgeShape.square,
+                                  padding: const EdgeInsets.all(5),
+                                  badgeColor: kWhitePurple,
+                                  borderRadius: BorderRadius.circular(12),
+                                  badgeContent: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 3),
+                                    child: Text(
+                                      widget.badgeText,
+                                      style: const TextStyle(
+                                        color: kNormalWhite,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 27,
+                                    backgroundColor: Colors.white,
+                                    child: Image.asset(
+                                      widget.imagePath,
                                     ),
                                   ),
                                 ),
-                                child: CircleAvatar(
-                                  radius: 27,
-                                  backgroundColor: Colors.white,
-                                  child: Image.asset(
-                                    widget.imagePath,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  child: Text(
+                                    widget.bottomText,
+                                    style: TextStyle(
+                                      color: kDeepBlue.withOpacity(.56),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 0),
-                                child: Text(
-                                  widget.bottomText,
-                                  style: TextStyle(
-                                    color: kDeepBlue.withOpacity(.56),
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         Row(

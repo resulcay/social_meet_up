@@ -17,6 +17,8 @@ const Color kDarkestPurple = Color(0xFF241332);
 const Color kDarkPink = Color(0xFF8A56AC);
 const Color kNormalPink = Color(0xFFD47FA6);
 const Color kDeepBlue = Color(0xFF374750);
+const Color kNormalGrey = Color(0xFF817889);
+const Color kDarkGrey = Color(0xFF998FA2);
 const Color kGrey = Color(0xFF979797);
 
 // Constant TextStyles
