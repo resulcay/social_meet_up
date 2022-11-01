@@ -31,5 +31,3 @@ TextStyle kTextStyle = TextStyle(
 // Constant ScrollPhysics
 
 BouncingScrollPhysics kBounceScroll = const BouncingScrollPhysics();
-NeverScrollableScrollPhysics kNeverScroll =
-    const NeverScrollableScrollPhysics();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/custom_floating_action_button.dart';
 import '../../constants.dart';
 import 'components/profile_state_component.dart';
 import 'components/profile_text_component.dart';
@@ -11,17 +12,8 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kDarkestPurple,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kNormalWhite,
-        onPressed: () {},
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.add,
-            size: 25,
-            color: kDarkestPurple,
-          ),
-        ),
+      floatingActionButton: CustomFloatingActionButton(
+        function: () {},
       ),
       body: SingleChildScrollView(
         child: Column(
