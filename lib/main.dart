@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_meet_up/providers/app_bar_provider.dart';
+import 'package:social_meet_up/screens/event_screen/event_screen.dart';
 import 'package:social_meet_up/screens/home_screen/home_screen.dart';
 
 import 'providers/index_provider.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "Montserrat",
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: const HomeScreen(),
+        home: const EventScreen(),
         // home: const OnboardingScreen(),
       ),
     );

@@ -22,35 +22,6 @@ class EventCardModel {
     required this.iconPath,
     required this.userName,
   });
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'day': day,
-      'timeOfDay': timeOfDay,
-      'completerTimeText': completerTimeText,
-      'descriptionText': descriptionText,
-      'imagePath': imagePath,
-      'iconPath': iconPath,
-      'userName': userName,
-    };
-  }
-
-  factory EventCardModel.fromMap(Map<String, dynamic> map) {
-    return EventCardModel(
-      day: map['day'] as String,
-      timeOfDay: map['timeOfDay'] as String,
-      completerTimeText: map['completerTimeText'] as String,
-      descriptionText: map['descriptionText'] as String,
-      imagePath: map['imagePath'] as String,
-      iconPath: map['iconPath'] as String,
-      userName: map['userName'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory EventCardModel.fromJson(String source) =>
-      EventCardModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 List<EventCardModel> eventCards = [
@@ -98,7 +69,6 @@ List<Color> eventCardColors = [
   kDarkestPurple,
   kNormalGreen
 ];
-
 // remove at index 0 then add end of array Colors.transparent.
 List<Color> eventCardBackgroundColors = [
   kDarkPink,
@@ -106,16 +76,34 @@ List<Color> eventCardBackgroundColors = [
   kNormalGreen,
   Colors.transparent
 ];
+List<Color> eventCardColors2 = [
+  kNormalGreen,
+  kDarkestPurple, // pass
+  kDarkBlueVariant,
+  kDarkBlue,
+];
 List<Color> eventCardBackgroundColors2 = [
   kMiddleGreen,
-  kDarkestPurple,
+  kMiddleGreen, // pass
+  kDarkBlue,
+  Colors.transparent
+];
+List<Color> eventCardColors3 = [
+  kSeaBlue,
+  kHighBlue,
+  kDarkBlue,
+  kNormalGreen,
+];
+List<Color> eventCardBackgroundColors3 = [
+  kHighBlue,
+  kDarkBlue,
   kNormalGreen,
   Colors.transparent
 ];
 
-List<Color> tree = [
+List<Color> appBarBackgroundColor = [
   kNormalPink,
+  kNormalGreen,
+  kSeaBlue,
   kNormalPink,
-  Colors.greenAccent,
-  Colors.orangeAccent,
 ];

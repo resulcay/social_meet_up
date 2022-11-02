@@ -61,7 +61,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar>
 
     return SliverAppBar(
       expandedHeight: isExpanded ? context.height * .2 : animation.value,
-      backgroundColor: tree[selectedIndex],
+      backgroundColor: appBarBackgroundColor[selectedIndex],
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
           if (isExpanded) {
