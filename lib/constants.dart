@@ -20,6 +20,7 @@ const Color kDarkPink = Color(0xFF8A56AC);
 const Color kNormalPink = Color(0xFFD47FA6);
 const Color kDeepBlue = Color(0xFF374750);
 const Color kHighBlue = Color(0xFF4666E5);
+const Color kHighGrey = Color(0xFF9599B3);
 const Color kNormalGrey = Color(0xFF817889);
 const Color kDarkGrey = Color(0xFF998FA2);
 const Color kGrey = Color(0xFF979797);
