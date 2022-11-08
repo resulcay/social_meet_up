@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_meet_up/media_query_extension.dart';
 import 'package:social_meet_up/screens/bringing_guests_screen/bringing_guests_screen.dart';
 
 import '../../constants.dart';
+import '../../providers/guest_count_provider.dart';
+import '../../providers/joining_event_provider.dart';
+import 'components/are_you_going_widget.dart';
 import 'components/glass_button.dart';
 
 class EventScreen extends StatelessWidget {
@@ -161,65 +165,9 @@ class EventScreen extends StatelessWidget {
               )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Container(
-              height: 68,
-              width: context.width,
-              decoration: const BoxDecoration(
-                color: kDarkPurple,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(70),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset("assets/images/edit.png"),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Are you going?",
-                        style: TextStyle(
-                          color: kNormalWhite,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "56 spots left",
-                        style: TextStyle(
-                          color: kDarkGrey,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  GlassButton(
-                    function: () {},
-                    buttonColor: kLightGrey,
-                    iconPath: "assets/images/x.png",
-                  ),
-                  GlassButton(
-                    function: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) =>
-                            const BringingGuestsScreen(),
-                      );
-                    },
-                    buttonColor: kLightGrey,
-                    iconPath: "assets/images/check.png",
-                  ),
-                ],
-              ),
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: AreYouGoingWidget(),
           )
         ],
       ),

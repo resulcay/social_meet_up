@@ -12,18 +12,22 @@ class BringingGuestsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return Scaffold(
       backgroundColor: Colors.transparent,
-      elevation: 0,
-      child: BackdropFilter(
+      body: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: PageView(
-          controller: joinEventPageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: const [
-            OnboardingQuestion(),
-            SuccessfulJoin(),
-          ],
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: PageView(
+              controller: joinEventPageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: const [
+                OnboardingQuestion(),
+                SuccessfulJoin(),
+              ],
+            ),
+          ),
         ),
       ),
     );

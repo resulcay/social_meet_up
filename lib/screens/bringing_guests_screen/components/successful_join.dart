@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social_meet_up/screens/event_screen/event_screen.dart';
 
 import '../../../constants.dart';
+import '../../../providers/guest_count_provider.dart';
+import '../../../providers/joining_event_provider.dart';
 import '../../onboarding_screen/components/sign_in_button.dart';
 
 class SuccessfulJoin extends StatelessWidget {
@@ -10,20 +14,24 @@ class SuccessfulJoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String guestCount =
+        Provider.of<GuestCounterProvider>(context, listen: true)
+            .guestCounter
+            .toString();
+    Provider.of<GuestCounterProvider>(context, listen: false).guestCounter = 0;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.close,
-                  color: kNormalWhite,
-                ),
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.close,
+                color: kNormalWhite,
               ),
             ),
           ],
@@ -31,11 +39,11 @@ class SuccessfulJoin extends StatelessWidget {
         SizedBox(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
-                  "You +1 guest are going!",
-                  style: TextStyle(
+                  "You +$guestCount guest(s) are going!",
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: kNormalWhite,
@@ -45,7 +53,7 @@ class SuccessfulJoin extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Padding(
                       padding: EdgeInsets.only(right: 5),
@@ -131,7 +139,11 @@ class SuccessfulJoin extends StatelessWidget {
             SignInButton(
               text: "done",
               color: kDarkPink,
-              function: () {},
+              function: () {
+                Provider.of<JoiningEventProvider>(context, listen: false)
+                    .changeJoiningStatus();
+                Navigator.pop(context);
+              },
             ),
           ],
         ),

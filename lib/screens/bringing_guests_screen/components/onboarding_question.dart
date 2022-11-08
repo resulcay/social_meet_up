@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_meet_up/screens/bringing_guests_screen/bringing_guests_screen.dart';
 
 import '../../../constants.dart';
+import '../../../providers/guest_count_provider.dart';
 import '../../onboarding_screen/components/sign_in_button.dart';
 
 class OnboardingQuestion extends StatelessWidget {
@@ -17,14 +19,13 @@ class OnboardingQuestion extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.close,
-                  color: kNormalWhite,
-                ),
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.close,
+                color: kNormalWhite,
               ),
             ),
           ],
@@ -43,48 +44,55 @@ class OnboardingQuestion extends StatelessWidget {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: Container(
-                      height: 52,
-                      width: 52,
-                      decoration: const BoxDecoration(
-                        color: kHighGrey,
-                        shape: BoxShape.circle,
-                        backgroundBlendMode: BlendMode.softLight,
-                      ),
-                      child: Image.asset(
-                        "assets/images/minus.png",
-                      ),
+                  onTap: () {
+                    Provider.of<GuestCounterProvider>(context, listen: false)
+                        .changeGuestCount(-1);
+                  },
+                  child: Container(
+                    height: 52,
+                    width: 52,
+                    decoration: const BoxDecoration(
+                      color: kHighGrey,
+                      shape: BoxShape.circle,
+                      backgroundBlendMode: BlendMode.softLight,
+                    ),
+                    child: Image.asset(
+                      "assets/images/minus.png",
                     ),
                   ),
                 ),
-                const Text(
-                  "1",
-                  style: TextStyle(
-                    color: kNormalWhite,
-                    fontSize: 42,
-                    fontWeight: FontWeight.w400,
+                SizedBox(
+                  width: 150,
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    Provider.of<GuestCounterProvider>(context, listen: true)
+                        .guestCounter
+                        .toString(),
+                    style: const TextStyle(
+                      color: kNormalWhite,
+                      fontSize: 42,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: Container(
-                      height: 52,
-                      width: 52,
-                      decoration: const BoxDecoration(
-                        color: kDarkPink,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.asset(
-                        "assets/images/plus.png",
-                      ),
+                  onTap: () {
+                    Provider.of<GuestCounterProvider>(context, listen: false)
+                        .changeGuestCount(1);
+                  },
+                  child: Container(
+                    height: 52,
+                    width: 52,
+                    decoration: const BoxDecoration(
+                      color: kDarkPink,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.asset(
+                      "assets/images/plus.png",
                     ),
                   ),
                 ),

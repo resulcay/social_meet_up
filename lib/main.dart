@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_meet_up/providers/app_bar_provider.dart';
+import 'package:social_meet_up/providers/guest_count_provider.dart';
+import 'package:social_meet_up/providers/joining_event_provider.dart';
 import 'package:social_meet_up/screens/event_screen/event_screen.dart';
 import 'providers/index_provider.dart';
 
@@ -17,6 +19,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => IndexProvider()),
         ChangeNotifierProvider(create: (_) => AppBarProvider()),
+        ChangeNotifierProvider(create: (_) => GuestCounterProvider()),
+        ChangeNotifierProvider(create: (_) => JoiningEventProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
