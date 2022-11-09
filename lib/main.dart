@@ -4,6 +4,8 @@ import 'package:social_meet_up/providers/app_bar_provider.dart';
 import 'package:social_meet_up/providers/guest_count_provider.dart';
 import 'package:social_meet_up/providers/joining_event_provider.dart';
 import 'package:social_meet_up/screens/event_screen/event_screen.dart';
+import 'package:social_meet_up/screens/messaging_screen/messaging_screen.dart';
+import 'package:social_meet_up/screens/notification_screen/notification_screen.dart';
 import 'providers/index_provider.dart';
 
 void main() {
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "Montserrat",
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: const EventScreen(),
+        home: const NotificationScreen(),
         // home: const OnboardingScreen(),
       ),
     );

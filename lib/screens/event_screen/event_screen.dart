@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:social_meet_up/media_query_extension.dart';
-import 'package:social_meet_up/screens/bringing_guests_screen/bringing_guests_screen.dart';
-
 import '../../constants.dart';
-import '../../providers/guest_count_provider.dart';
-import '../../providers/joining_event_provider.dart';
 import 'components/are_you_going_widget.dart';
-import 'components/glass_button.dart';
 
 class EventScreen extends StatelessWidget {
   const EventScreen({super.key});

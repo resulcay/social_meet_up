@@ -9,6 +9,7 @@ const Color kMiddleGreen = Color(0xFF52912E);
 const Color kNormalGreen = Color(0xFFB4C55B);
 const Color kNormalWhite = Color(0xFFFFFFFF);
 const Color kNormalBlue = Color(0xFF4F8DCB);
+const Color kHigherBlue = Color(0xFF3497FD);
 const Color kDarkWhite = Color(0xFFF1F0F2);
 const Color kNormalPurple = Color(0xFF5F4591);
 const Color kLightPurple = Color(0xFF403249);
