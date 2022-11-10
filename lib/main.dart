@@ -31,7 +31,9 @@ class MyApp extends StatelessWidget {
           fontFamily: "Montserrat",
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: const NotificationScreen(),
+        home: const Scaffold(
+          body: EventScreen(),
+        ),
         // home: const OnboardingScreen(),
       ),
     );

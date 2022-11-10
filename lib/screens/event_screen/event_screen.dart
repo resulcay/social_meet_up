@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_meet_up/media_query_extension.dart';
 import '../../constants.dart';
 import 'components/are_you_going_widget.dart';
+import 'components/read_more_bottom_sheet.dart';
 
 class EventScreen extends StatelessWidget {
   const EventScreen({super.key});
@@ -324,12 +325,15 @@ New to Yoga, or looking to take your mat to practice in new places?
 Get to know your local community and neighbors better by joining our Yoga family.
 ''',
                 style: TextStyle(
-                    color: kDarkGrey,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12),
+                  color: kDarkGrey,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  _readMoreBottomSheet(context);
+                },
                 child: const Text(
                   "Read more",
                   style: TextStyle(
@@ -404,6 +408,26 @@ Get to know your local community and neighbors better by joining our Yoga family
           const SizedBox(height: 50),
         ],
       ),
+    );
+  }
+
+  Future<dynamic> _readMoreBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      barrierColor: Colors.black12.withOpacity(.5),
+      backgroundColor: kNormalWhite,
+      constraints: BoxConstraints(
+        minHeight: 100,
+        maxHeight: context.height * .95,
+      ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(60),
+          bottomLeft: Radius.circular(60),
+          bottomRight: Radius.circular(60),
+        ),
+      ),
+      context: context,
+      builder: (context) => const ReadMoreBottomSheet(),
     );
   }
 }
