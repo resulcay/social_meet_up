@@ -5,6 +5,7 @@ import 'package:social_meet_up/providers/guest_count_provider.dart';
 import 'package:social_meet_up/providers/joining_event_provider.dart';
 import 'package:social_meet_up/screens/event_screen/event_screen.dart';
 import 'package:social_meet_up/screens/messaging_screen/messaging_screen.dart';
+import 'package:social_meet_up/screens/new_group_screen/new_group_screen.dart';
 import 'package:social_meet_up/screens/notification_screen/notification_screen.dart';
 import 'providers/index_provider.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: const Scaffold(
-          body: EventScreen(),
+          body: NewGroupScreen(),
         ),
         // home: const OnboardingScreen(),
       ),
