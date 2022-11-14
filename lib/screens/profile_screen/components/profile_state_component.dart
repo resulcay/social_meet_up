@@ -25,22 +25,22 @@ class ProfileStateComponent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Badge(
-            badgeColor: badgeColor,
-            shape: BadgeShape.circle,
-            badgeContent: Text(
-              badgeText,
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: kNormalWhite,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Image.asset(iconPath),
-            ),
-          ),
+          // Badge(
+          //   badgeColor: badgeColor,
+          //   shape: BadgeShape.circle,
+          //   badgeContent: Text(
+          //     badgeText,
+          //     style: const TextStyle(
+          //       fontSize: 12,
+          //       fontWeight: FontWeight.bold,
+          //       color: kNormalWhite,
+          //     ),
+          //   ),
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(top: 5),
+          //     child: Image.asset(iconPath),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 10,

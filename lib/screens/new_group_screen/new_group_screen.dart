@@ -109,6 +109,7 @@ class NewGroupScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  const SizedBox(height: 10),
                   CustomNewGroupTextField(
                     labelText: "Group name",
                     textEditingController: groupName,
@@ -165,6 +166,7 @@ class NewGroupScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const Spacer(),
                       IconButton(
                         onPressed: () {},
                         splashRadius: 30,
@@ -181,7 +183,7 @@ class NewGroupScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset("assets/images/dark-marker.png"),
+                      Image.asset("assets/images/heart.png"),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,

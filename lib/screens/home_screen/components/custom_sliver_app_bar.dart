@@ -96,33 +96,33 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar>
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Badge(
-                              alignment: Alignment.topRight,
-                              toAnimate: widget.badgeToAnimate,
-                              shape: BadgeShape.square,
-                              padding: const EdgeInsets.all(5),
-                              badgeColor: kWhitePurple,
-                              borderRadius: BorderRadius.circular(12),
-                              badgeContent: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 3),
-                                child: Text(
-                                  widget.badgeText,
-                                  style: const TextStyle(
-                                    color: kNormalWhite,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              child: CircleAvatar(
-                                radius: 27,
-                                backgroundColor: Colors.white,
-                                child: Image.asset(
-                                  widget.imagePath,
-                                ),
-                              ),
-                            ),
+                            // Badge(
+                            //   alignment: Alignment.topRight,
+                            //   toAnimate: widget.badgeToAnimate,
+                            //   shape: BadgeShape.square,
+                            //   padding: const EdgeInsets.all(5),
+                            //   badgeColor: kWhitePurple,
+                            //   borderRadius: BorderRadius.circular(12),
+                            //   badgeContent: Padding(
+                            //     padding:
+                            //         const EdgeInsets.symmetric(horizontal: 3),
+                            //     child: Text(
+                            //       widget.badgeText,
+                            //       style: const TextStyle(
+                            //         color: kNormalWhite,
+                            //         fontSize: 12,
+                            //         fontWeight: FontWeight.w600,
+                            //       ),
+                            //     ),
+                            //   ),
+                            //   child: CircleAvatar(
+                            //     radius: 27,
+                            //     backgroundColor: Colors.white,
+                            //     child: Image.asset(
+                            //       widget.imagePath,
+                            //     ),
+                            //   ),
+                            // ),
                             Text(
                               widget.bottomText,
                               style: TextStyle(
@@ -256,33 +256,33 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar>
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Badge(
-                                  alignment: Alignment.topRight,
-                                  toAnimate: widget.badgeToAnimate,
-                                  shape: BadgeShape.square,
-                                  padding: const EdgeInsets.all(5),
-                                  badgeColor: kWhitePurple,
-                                  borderRadius: BorderRadius.circular(12),
-                                  badgeContent: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3),
-                                    child: Text(
-                                      widget.badgeText,
-                                      style: const TextStyle(
-                                        color: kNormalWhite,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                  child: CircleAvatar(
-                                    radius: 27,
-                                    backgroundColor: Colors.white,
-                                    child: Image.asset(
-                                      widget.imagePath,
-                                    ),
-                                  ),
-                                ),
+                                // Badge(
+                                //   alignment: Alignment.topRight,
+                                //   toAnimate: widget.badgeToAnimate,
+                                //   shape: BadgeShape.square,
+                                //   padding: const EdgeInsets.all(5),
+                                //   badgeColor: kWhitePurple,
+                                //   borderRadius: BorderRadius.circular(12),
+                                //   badgeContent: Padding(
+                                //     padding: const EdgeInsets.symmetric(
+                                //         horizontal: 3),
+                                //     child: Text(
+                                //       widget.badgeText,
+                                //       style: const TextStyle(
+                                //         color: kNormalWhite,
+                                //         fontSize: 12,
+                                //         fontWeight: FontWeight.w600,
+                                //       ),
+                                //     ),
+                                //   ),
+                                //   child: CircleAvatar(
+                                //     radius: 27,
+                                //     backgroundColor: Colors.white,
+                                //     child: Image.asset(
+                                //       widget.imagePath,
+                                //     ),
+                                //   ),
+                                // ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 0),
                                   child: Text(
