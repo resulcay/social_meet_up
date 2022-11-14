@@ -158,7 +158,10 @@ class NewGroupScreen extends StatelessWidget {
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [
-                                  Image.asset("assets/images/map.png"),
+                                  Image.asset(
+                                    "assets/images/map.png",
+                                    scale: 1.1,
+                                  ),
                                   Image.asset("assets/images/map-pin.png"),
                                 ],
                               ),
@@ -183,12 +186,9 @@ class NewGroupScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset("assets/images/heart.png"),
+                      Image.asset("assets/images/heart-2.png"),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 2,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
